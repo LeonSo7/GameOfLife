@@ -1,0 +1,405 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{hhline}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{url}
+
+\oddsidemargin -10mm
+\evensidemargin -10mm
+\textwidth 160mm
+\textheight 200mm
+\renewcommand\baselinestretch{1.0}
+
+\pagestyle {plain}
+\pagenumbering{arabic}
+
+\newcounter{stepnum}
+
+%% Comments
+
+\usepackage{color}
+
+\newif\ifcomments\commentstrue
+
+\ifcomments
+\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\else
+\newcommand{\authornote}[3]{}
+\newcommand{\todo}[1]{}
+\fi
+
+\newcommand{\wss}[1]{\authornote{blue}{SS}{#1}}
+
+\title{Assignment 4 Specification}
+\author{Leon So}
+
+\begin {document}
+
+\maketitle
+This Module Interface Specification (MIS) document contains modules, types and
+methods for implementing, modelling, and viewing the state of a game of Conway's game of life.
+
+\newpage
+
+\section* {Cell Types Module}
+
+\subsection*{Module}
+
+CellTypes
+
+\subsection* {Uses}
+
+N/A
+
+\subsection* {Syntax}
+
+\subsubsection* {Exported Constants}
+None
+
+\subsubsection* {Exported Types}
+
+CellState = \{Dead, Alive\}
+
+\subsubsection* {Exported Access Programs}
+
+None
+
+\subsection* {Semantics}
+
+\subsubsection* {State Variables}
+
+None
+
+\subsubsection* {State Invariant}
+
+None
+
+\newpage
+
+\section* {Cell Module}
+
+\subsection* {Template Module}
+
+Cell
+
+\subsection* {Uses}
+
+CellTypes
+
+\subsection* {Syntax}
+
+\subsubsection* {Exported Types}
+
+Cell = ?
+
+\subsubsection* {Exported Constants}
+
+None
+
+\subsubsection* {Exported Access Programs}
+
+\begin{tabular}{| l | l | l | p{5cm} |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+new Cell & $\mathbb{N}$, $\mathbb{N}$ & Cell & invalid\_argument\\
+\hline
+getX & & $\mathbb{N}$ & none\\
+\hline
+getY& & $\mathbb{N}$ & none\\
+\hline
+getState & & CellState & none\\
+\hline
+setState & CellState & & none\\
+\hline
+getAdj & & $\mathbb{N}$ & none\\
+\hline
+setAdj & $\mathbb{N}$ & & none\\
+\hline
+\end{tabular}
+
+\subsection* {Semantics}
+
+\subsubsection* {State Variables}
+
+$X$: $\mathbb{N}$\\
+$Y$: $\mathbb{N}$\\
+$STATE$: CellState\\
+$ADJ$: $\mathbb{N}$
+
+\subsubsection* {State Invariant}
+X $<$ 25\\
+Y $<$ 25
+
+\subsubsection* {Assumptions \& Design Decisions}
+
+\begin{itemize}
+\item The Cell constructor is called for each object instance before any
+  other access routine is called for that object.  The constructor can only be
+  called once.
+
+\item X and Y, the coordinates of the Cell, will always be less than 25.
+
+\item Every Cell will be initialized as Dead, and can be set to Alive.
+\end{itemize}
+
+\subsubsection* {Access Routine Semantics}
+
+new Cell($n_0, n_1$):
+\begin{itemize}
+\item transition: $X, Y, STATE, ADJ := n_0, n_1, Dead, 0$
+\item output: $\mathit{out} := \mathit{self}$
+\item exception: $exc := ((n_0 \ge 25 \vee n_1 \ge 25) \Rightarrow \mathit{invalid\_argument})$
+\end{itemize}
+
+\noindent getX():
+\begin{itemize}
+\item output: $out := X$
+\item exception: none
+\end{itemize}
+
+\noindent getY():
+\begin{itemize}
+\item output: $out := Y$
+\item exception: none
+\end{itemize}
+
+\noindent setState($\mathit{s}$):
+\begin{itemize}
+\item transition: $STATE := s$
+\item exception: $exc := none$
+\end{itemize}
+
+\noindent getAdj():
+\begin{itemize}
+\item output: $\mathit{out} := ADJ$
+
+\item exception: none
+
+\end{itemize}
+
+\noindent setAdj(n):
+\begin{itemize}
+\item transition: $\mathit{ADJ} := n$
+
+\item exception: $exc := none$
+
+\end{itemize}
+
+\newpage
+
+\section* {CellGrid Module}
+
+\subsection* {Template Module}
+
+CellGrid is Seq of (Seq of Cell)
+
+\newpage
+
+\section* {Game Board ADT Module}
+
+\subsection*{Template Module}
+
+Board
+
+\subsection* {Uses}
+
+\noindent CellTypes\\
+\noindent CellGrid\\
+\noindent Cell\\
+\noindent View
+
+\subsection* {Syntax}
+
+\subsubsection* {Exported Access Programs}
+
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+new Board  & string & Board & invalid\_argument\\
+\hline
+getTab & $\mathbb{N, N}$ & Cell & out\_of\_range\\
+\hline
+nextState & & & \\
+\hline
+outputAndView & & & \\
+\hline
+\end{tabular}
+
+\subsection* {Semantics}
+
+\subsubsection* {State Variables}
+
+$grid$: CellGrid \textit{\#Grid of Cells}
+
+\subsubsection* {State Invariant}
+
+$|grid| = 25 \times 25$ \textit{\#Size of grid fixed to 25 $\times$ 25}
+
+\subsubsection* {Assumptions \& Design Decisions}
+
+\begin{itemize}
+
+\item The Board constructor is called before any other access
+  routine is called on that instance. Once a Board has been created, the
+  constructor will not be called on it again.
+\item The size of the grid will be fixed, to a 25 $\times$ 25 matrix.
+\item Any Cell outside of the 25 $\times$ 25 matrix will be considered Dead, therefore, when counting neighbours using countNeighbours(), there is no such Alive Cell outside of the 25 $\times$ 25 matrix.
+
+\end{itemize}
+
+\subsubsection* {Access Routine Semantics}
+
+\noindent Board($inFile$):
+\begin{itemize}
+\item transition: 
+$grid := init\_board()$ \\ Read data from inFile. Use this data to update the state of the Board.\\
+This file contains coordinate of any Cell that is initially alive. Any Cell will have it's state set to Alive using the local function setAlive().\\ \\
+The text file has the following format. Each cell's coordinate is identified by a string with the x-coordinate and y-coordinate separated by a comma. All cell coordinates are separated by a new line.
+\item exception: if inFile does not exist, raise an invalid\_argument exception.
+\end{itemize}
+
+\noindent getCell($x,y$):
+\begin{itemize}
+\item output: grid[x][y]
+
+\item exception:  $exc := ((x \ge 25 \vee y \ge 25) \Rightarrow \mathit{out\_of\_range})$
+\end{itemize}
+
+\noindent nextState():
+\begin{itemize}
+\item transition:
+calls local function countNeighbours() to count the number of \\ neighbours/adjacents for each Cell in grid. \\
+$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] : \\(grid[x][y].getAdj() = 3 \Rightarrow grid[x][y] := grid[x][y].setState(Alive) |\\ grid[x][y].getAdj() \le 1 \Rightarrow grid[x][y] := grid[x][y].setState(Dead) |\\ grid[x][y].getAdj() \ge 4 \Rightarrow grid[x][y] := grid[x][y].setState(Dead))))$
+\item exception: None
+\end{itemize}
+
+\noindent outputAndView():
+\begin{itemize}
+\item output: calls the view(CellGrid grid) and writeState(CellGrid grid) functions from the View class, passing grid into both functions.
+\item exception: None
+\end{itemize}
+
+\subsection*{Local Types}
+None
+
+\subsection*{Local Functions}
+
+\noindent $\text{init\_board} : $\\
+$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] : grid[x][y] := Cell(x,y))$
+
+\noindent $\text{setAlive} : \mathbb{N} \times \mathbb{N}$\\
+grid[x][y].setState(Alive)\\
+
+\noindent $\text{setDead} : \mathbb{N} \times \mathbb{N}$\\
+grid[x][y].setState(Dead)\\
+
+\noindent $\text{countNeighbours} : $\\
+$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((x-1 \ge 0 \land y-1 \ge 0) \Rightarrow (grid[x-1][y-1].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+
+\noindent$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((x-1 \ge 0) \Rightarrow (grid[x-1][y].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+
+\noindent$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((x-1 \ge 0 \land y + 1 < 25) \Rightarrow (grid[x-1][y+1].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+
+\noindent$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((y-1 \ge 0) \Rightarrow (grid[x][y-1].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+
+\noindent$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((y+1 \ge 0) \Rightarrow (grid[x][y+1].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+
+\noindent$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((x+1 < 25 \land y - 1 \ge 0) \Rightarrow (grid[x+1][y-1].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+
+\noindent$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((x+1 < 25) \Rightarrow (grid[x+1][y].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+
+\noindent$ (\forall x : \mathbb{N} | x \in [0..24] : (\forall y : \mathbb{N} | y \in [0..24] :\\
+((x+1 < 25 \land y+1 < 25) \Rightarrow (grid[x+1][y+1].getState() = Alive \Rightarrow\\ grid[x][y] := grid[x][y].setAdj(grid[x][y].getAdj()+1)))))$\\
+\newpage
+
+\section* {View Module}
+
+\subsection* {Uses}
+
+\noindent CellTypes\\
+\noindent CellGrid\\
+\noindent Cell\\
+
+\subsection* {Syntax}
+
+\subsubsection* {Exported Access Programs}
+
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+view  & CellGrid & & none\\
+\hline
+writeState & CellGrid & & none\\
+\hline
+\end{tabular}
+
+\subsection* {Semantics}
+
+\subsubsection* {State Variables}
+
+None
+
+\subsubsection* {State Invariant}
+
+None
+\subsubsection* {Assumptions \& Design Decisions}
+
+\begin{itemize}
+
+\item The view(CellGrid grid) function will output an ASCII representation of the game state in the console.
+
+\item The writeState(CellGrid grid) function will output an output file,``output.txt", which contains the state of the game. Each time this method is called, it will produce a new "output.txt" file if it does not already exist, or override the existing file.
+
+\end{itemize}
+
+\subsubsection* {Access Routine Semantics}
+
+\noindent view($grid$):
+\begin{itemize}
+\item output: 
+output an ASCII representation of the game state and the grid of cells in console. This function checks the state of each Cell in grid using the getState() method. The ASCII representation is outputted in the following format:
+    \begin{itemize}
+        \item Each row contains 25 cells.
+        \item There are 25 rows.
+        \item Each row is printed on a new line.
+        \item Every Dead Cell is represented by `[ ]'.
+        \item Every Alive Cell is represented by `[\#]'.
+        \item Each Cell in a row is printed side by side with no space in-between.
+    \end{itemize}
+\item exception: none
+\end{itemize}
+
+\noindent writeState($grid$):
+\begin{itemize}
+\item output: 
+outputs a file representing the state of the game and inputted grid, "output.txt", which contains the state of the game. This file contains coordinate of any Cell that is alive. The text file has the following format.  Each cell’s coordinate is identified by a string with the x-coordinate and y-coordinate separated by a comma.  All cell coordinates are separated by a new line.
+\item exception: none
+\end{itemize}
+
+\subsection*{Local Types}
+None
+
+\subsection*{Local Functions}
+None
+
+\newpage
+\section*{Critique of Design}
+My design implements information hiding, as all lower level details are hidden through the use of private/local function. There is also high cohesion between my modules, as all the modules are closely related to each other. Also there is relatively low coupling, as the two modules which has the highest fan out are the GameBoard module and View module. They both use Cell, CellTypes, and CellGrid, therefore, with a fan-out of 3, there is relatively low coupling. The majority of this program is essential, except for the CellTypes and CellGrid module. These modules are not needed, however, simplify the process of developing the code through the typedefs and enumerations declared in these modules. All routines in the Cell, GameBoard, and View module are essential. None of the routines in these modules can be replaced by other routines in the module. All public routines and methods are minimal as they each perform an independent service, however my design could be more minimal through decomposing the local functions further such that they each perform a minimum independent service. This program and specification is also consistent, as consistent naming conventions are used throughout the entire program and specification. In addition, there is also consistent ordering of parameters, such as the ordering of x, y coordinates. The GameBoard module is not very general, as it accepts an input file of a specific and assumed formatting. This program also accounts for unexpected inputs such as through raising an out\_of\_range exception if a user inputs a coordinate out of range for the getCell(nat $n_0$, nat $n_1$) function. 
+\end {document}

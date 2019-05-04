@@ -1,0 +1,96 @@
+\hypertarget{class_cell}{}\section{Cell Class Reference}
+\label{class_cell}\index{Cell@{Cell}}
+
+
+\hyperlink{class_cell}{Cell} abstract data type.  
+
+
+
+
+{\ttfamily \#include $<$Cell.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_cell_a394510643e8664cf12b5efaf5cb99f71}\label{class_cell_a394510643e8664cf12b5efaf5cb99f71}} 
+\hyperlink{class_cell_a394510643e8664cf12b5efaf5cb99f71}{Cell} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor for a cell. \end{DoxyCompactList}\item 
+\hyperlink{class_cell_a79448546aec44bac1be25a271d256f2a}{Cell} (\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} n0, \hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} n1)
+\begin{DoxyCompactList}\small\item\em Empty constructor for a cell. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cell_a3a5168898f7ce737fcbfe422a8812a57}\label{class_cell_a3a5168898f7ce737fcbfe422a8812a57}} 
+\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} \hyperlink{class_cell_a3a5168898f7ce737fcbfe422a8812a57}{getX} () const
+\begin{DoxyCompactList}\small\item\em Gets the x coordinate for a cell. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cell_ab9c330c150fba60c8bf1ec21442f7c54}\label{class_cell_ab9c330c150fba60c8bf1ec21442f7c54}} 
+\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} \hyperlink{class_cell_ab9c330c150fba60c8bf1ec21442f7c54}{getY} () const
+\begin{DoxyCompactList}\small\item\em Gets the y coordinate for a cell. \end{DoxyCompactList}\item 
+void \hyperlink{class_cell_a0a162ed55d7c945b9f44d71a0a9ce5ad}{set\+State} (\hyperlink{_cell_types_8h_ad5292c4e76abc657b113de5594268aa9}{Cell\+State} s)
+\begin{DoxyCompactList}\small\item\em Sets the state for a cell. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cell_a131681c445fdd04a6b91f8e15ef09d1f}\label{class_cell_a131681c445fdd04a6b91f8e15ef09d1f}} 
+\hyperlink{_cell_types_8h_ad5292c4e76abc657b113de5594268aa9}{Cell\+State} \hyperlink{class_cell_a131681c445fdd04a6b91f8e15ef09d1f}{get\+State} () const
+\begin{DoxyCompactList}\small\item\em Gets the state for a cell. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cell_abfddfe3b7b51dc40511ead85d227661b}\label{class_cell_abfddfe3b7b51dc40511ead85d227661b}} 
+\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} \hyperlink{class_cell_abfddfe3b7b51dc40511ead85d227661b}{get\+Adj} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of adjacent cells for a cell. \end{DoxyCompactList}\item 
+void \hyperlink{class_cell_a78a948c77f34c1801f427b3b11ddd731}{set\+Adj} (\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} n)
+\begin{DoxyCompactList}\small\item\em Sets the number of adjacent cells for a cell. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_cell}{Cell} abstract data type. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_cell_a79448546aec44bac1be25a271d256f2a}\label{class_cell_a79448546aec44bac1be25a271d256f2a}} 
+\index{Cell@{Cell}!Cell@{Cell}}
+\index{Cell@{Cell}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{Cell()}{Cell()}}
+{\footnotesize\ttfamily Cell\+::\+Cell (\begin{DoxyParamCaption}\item[{\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat}}]{n0,  }\item[{\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat}}]{n1 }\end{DoxyParamCaption})}
+
+
+
+Empty constructor for a cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n0} & -\/ the x coordinate of the cell \\
+\hline
+{\em n1} & -\/ the y coordinate of the cell \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_cell_a78a948c77f34c1801f427b3b11ddd731}\label{class_cell_a78a948c77f34c1801f427b3b11ddd731}} 
+\index{Cell@{Cell}!set\+Adj@{set\+Adj}}
+\index{set\+Adj@{set\+Adj}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{set\+Adj()}{setAdj()}}
+{\footnotesize\ttfamily void Cell\+::set\+Adj (\begin{DoxyParamCaption}\item[{\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat}}]{n }\end{DoxyParamCaption})}
+
+
+
+Sets the number of adjacent cells for a cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & -\/ the number of neighbours/adjacents for the cell \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_cell_a0a162ed55d7c945b9f44d71a0a9ce5ad}\label{class_cell_a0a162ed55d7c945b9f44d71a0a9ce5ad}} 
+\index{Cell@{Cell}!set\+State@{set\+State}}
+\index{set\+State@{set\+State}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{set\+State()}{setState()}}
+{\footnotesize\ttfamily void Cell\+::set\+State (\begin{DoxyParamCaption}\item[{\hyperlink{_cell_types_8h_ad5292c4e76abc657b113de5594268aa9}{Cell\+State}}]{s }\end{DoxyParamCaption})}
+
+
+
+Sets the state for a cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & -\/ the state to be set for the cell \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_cell_8h}{Cell.\+h}\end{DoxyCompactItemize}

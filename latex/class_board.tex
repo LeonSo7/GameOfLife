@@ -1,0 +1,47 @@
+\hypertarget{class_board}{}\section{Board Class Reference}
+\label{class_board}\index{Board@{Board}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_board_a9ee491d4fea680cf69b033374a9fdfcb}\label{class_board_a9ee491d4fea680cf69b033374a9fdfcb}} 
+\hyperlink{class_board_a9ee491d4fea680cf69b033374a9fdfcb}{Board} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor for a board. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_board_aaeeebed35a341ef519be2b6442e53d9b}\label{class_board_aaeeebed35a341ef519be2b6442e53d9b}} 
+\hyperlink{class_board_aaeeebed35a341ef519be2b6442e53d9b}{Board} (const char $\ast$in\+File)
+\begin{DoxyCompactList}\small\item\em Constructor for a board. \end{DoxyCompactList}\item 
+\hyperlink{class_cell}{Cell} \hyperlink{class_board_af3180b2b2f16752be1cde121b7a68bef}{get\+Cell} (\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} x, \hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} y) const
+\begin{DoxyCompactList}\small\item\em Getter -\/ gets cell at x and y coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_board_ae67c118210572c8f5f3163f39181a880}\label{class_board_ae67c118210572c8f5f3163f39181a880}} 
+void \hyperlink{class_board_ae67c118210572c8f5f3163f39181a880}{next\+State} ()
+\begin{DoxyCompactList}\small\item\em Getter -\/ gets the next state of the game. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_board_a456879e807d0479d474ee897e34fcd64}\label{class_board_a456879e807d0479d474ee897e34fcd64}} 
+void \hyperlink{class_board_a456879e807d0479d474ee897e34fcd64}{output\+And\+View} ()
+\begin{DoxyCompactList}\small\item\em Calls the \hyperlink{class_view}{View()} function to output and view game state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_board_af3180b2b2f16752be1cde121b7a68bef}\label{class_board_af3180b2b2f16752be1cde121b7a68bef}} 
+\index{Board@{Board}!get\+Cell@{get\+Cell}}
+\index{get\+Cell@{get\+Cell}!Board@{Board}}
+\subsubsection{\texorpdfstring{get\+Cell()}{getCell()}}
+{\footnotesize\ttfamily \hyperlink{class_cell}{Cell} Board\+::get\+Cell (\begin{DoxyParamCaption}\item[{\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat}}]{x,  }\item[{\hyperlink{_cell_types_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat}}]{y }\end{DoxyParamCaption}) const}
+
+
+
+Getter -\/ gets cell at x and y coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & -\/ the x coordinate of the cell \\
+\hline
+{\em y} & -\/ the y coordinate of the cell \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a cell 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_game_board_8h}{Game\+Board.\+h}\end{DoxyCompactItemize}
